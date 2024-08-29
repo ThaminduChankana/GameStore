@@ -17,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args); //create a new instance of the
 
 var app = builder.Build(); 
 
+const string GetGameEndPointName = "GetGameById";
+
 List<GameDTO> games = [
     new (1, "The Witcher 3: Wild Hunt", "RPG", 39.99m, new DateOnly(2015, 5, 19)),
     new (2, "Cyberpunk 2077", "RPG", 59.99m, new DateOnly(2020, 12, 10)),
@@ -30,7 +32,7 @@ app.MapGet("games", () => games);  //MapGet() is used to map a HTTP GET request 
 
 //GET /games/{id}
 app.MapGet("games/{id}", (int id) => games.Find(game=> game.Id == id))
-.WithName("GetGameById"); //WithName() is used to give a name to a specific route
+.WithName(GetGameEndPointName); //WithName() is used to give a name to a specific route
 
 //POST /games
 app.MapPost("games", (CreateGameDTO newGame) => 
@@ -44,10 +46,48 @@ app.MapPost("games", (CreateGameDTO newGame) =>
 
     games.Add(game);
 
-    return Results.CreatedAtRoute("GetGameById", new { id = game.Id }, game); 
+    return Results.CreatedAtRoute(GetGameEndPointName, new { id = game.Id }, game); 
     //Results is a class that is used to return a specific HTTP status code and a value (prebuilt HTTP responses)
 });
 
+//PUT /games/{id}
+app.MapPut("games/{id}", (int id, UpdateGameDTO updatedGame) => 
+{
+    GameDTO? game = games.Find(game => game.Id == id);
+
+    if (game is null)
+    {
+        return Results.NotFound();
+    }
+
+    GameDTO updatedGameDTO = game with
+    {
+        Name = updatedGame.Name,
+        Genre = updatedGame.Genre,
+        Price = updatedGame.Price,
+        ReleaseDate = updatedGame.ReleaseDate
+    };
+
+    int index = games.FindIndex(game => game.Id == id);
+    games[index] = updatedGameDTO;
+
+    return Results.Ok(updatedGameDTO); 
+});
+
+//DELETE /games/{id}
+app.MapDelete("games/{id}", (int id) => 
+{
+    GameDTO? game = games.Find(game => game.Id == id);
+
+    if(game == null){
+        return Results.NotFound();
+    }
+
+    games.Remove(game);
+
+    return Results.Ok(game);
+
+});
 
 app.Run(); 
 

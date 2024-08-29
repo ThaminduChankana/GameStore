@@ -1,4 +1,33 @@
+###
 GET http://localhost:5298 
 
-
+###
 GET http://localhost:5298/games
+
+###
+GET http://localhost:5298/games/6
+
+###
+POST http://localhost:5298/games
+Content-Type: application/json
+
+{
+  "Name":"Black Myth Wukong", 
+  "Genre":"RPG", 
+  "Price":59.99, 
+  "ReleaseDate":"2024-08-20"	
+}
+
+###
+PUT http://localhost:5298/games/6
+Content-Type: application/json
+
+{
+  "Name":"Black Myth Wukong", 
+  "Genre":"RPG", 
+  "Price":49.99, 
+  "ReleaseDate":"2024-08-20"	
+}
+
+###
+DELETE http://localhost:5298/games/6
