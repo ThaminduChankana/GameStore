@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk.Web"> <!-- Defines what kind of a project -->
+
+  <PropertyGroup> <!-- Defines the properties of the project -->
+    <TargetFramework>net8.0</TargetFramework> <!-- Can access APIs of the framework-->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+
+<!-- Defines what kind of a project -->
