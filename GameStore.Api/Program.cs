@@ -31,7 +31,13 @@ List<GameDTO> games = [
 app.MapGet("games", () => games);  //MapGet() is used to map a HTTP GET request to a specific route
 
 //GET /games/{id}
-app.MapGet("games/{id}", (int id) => games.Find(game=> game.Id == id))
+app.MapGet("games/{id}", (int id) => 
+{
+    GameDTO? game = games.Find(game => game.Id == id);
+
+    return game is null ? Results.NotFound() : Results.Ok(game);
+    
+})
 .WithName(GetGameEndPointName); //WithName() is used to give a name to a specific route
 
 //POST /games
