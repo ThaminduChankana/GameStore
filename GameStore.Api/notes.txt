@@ -1,0 +1,9 @@
+Object Relational Mapping- Technique for converting data between a relational databasae and an object oriented program.
+
+Entity Framework core - a lightweight, extensible, open source and cross platform ORM for .Net
+- sits between DB and Rest API
+- Minimal data access queries - LINQ (Language integrated Native Query)
+- Tooling for DB sync
+
+
+
