@@ -1,9 +1,14 @@
-Object Relational Mapping- Technique for converting data between a relational databasae and an object oriented program.
+Object Relational Mapping- Technique for converting data between a relational database and an object oriented program.
 
 Entity Framework core - a lightweight, extensible, open source and cross platform ORM for .Net
 - sits between DB and Rest API
 - Minimal data access queries - LINQ (Language integrated Native Query)
 - Tooling for DB sync
 
+Microsoft.EntityFrameworkCore.Sqlite is a Sqlite database
 
+dotnet.ef is a tool used to execute entity framework related commands
 
+Microsoft.EntityFrameworkCore.Design is used to generate entity framework migration -
+
+dotnet ef migrations add InitialCreate --output-dir Data\Migrations is used to create a migration. migrations are used to create a database schema based on the entity framework model.

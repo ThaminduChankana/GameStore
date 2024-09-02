@@ -1,3 +1,4 @@
+using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args); //create a new instance of the WebApplication class
@@ -17,6 +18,13 @@ var builder = WebApplication.CreateBuilder(args); //create a new instance of the
 
 var app = builder.Build(); 
 
+//var connString = "Data Source=GameStore.db"; //connection string to the database
+//builder.Services.AddSqlite<GameStoreContext>(connString); //AddSqlite() is an extension method that is used to add a SQLite database to the application (Dependency Injection)
+
+var connString = builder.Configuration.GetConnectionString("GameStore"); //GetConnectionString() is a method that is used to get the connection string from the configuration file
+
+builder.Services.AddSqlite<GameStoreContext>(connString); //AddSqlite() is an extension method that is used to add a SQLite database to the application (Dependency Injection)
+
 app.MapGamesEndpoints(); //MapGamesEndpoints() is an extension method that is used to map the endpoints of the application
 
 app.Run(); 
@@ -25,3 +33,6 @@ app.Run();
 
 //bootstrap application - first lines of code that are executed when the application starts
 //use of bootstrap code is to configure the application and start the server
+
+
+//
